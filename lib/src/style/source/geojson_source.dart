@@ -21,6 +21,7 @@ class GeoJsonSource extends Source {
     bool? autoMaxZoom,
     double? prefetchZoomDelta,
     TileCacheBudget? tileCacheBudget,
+    String? promoteId,
   }) : super(id: id) {
     _data = data;
     _maxzoom = maxzoom;
@@ -37,12 +38,15 @@ class GeoJsonSource extends Source {
     _autoMaxZoom = autoMaxZoom;
     _prefetchZoomDelta = prefetchZoomDelta;
     _tileCacheBudget = tileCacheBudget;
+    _promoteId = promoteId;
   }
 
   @override
   String getType() => "geojson";
 
   String? _data;
+
+  String? _promoteId;
 
   /// A URL to a GeoJSON file, or inline GeoJSON.
   Future<String?> get data async {
@@ -319,6 +323,9 @@ class GeoJsonSource extends Source {
       }
       if (_autoMaxZoom != null) {
         properties["autoMaxZoom"] = _autoMaxZoom;
+      }
+      if (_promoteId != null) {
+        properties["promoteId"] = _promoteId;
       }
     }
 
